@@ -401,6 +401,14 @@ ul.tree-children{padding-left:18px}
 .nav-bar a{display:inline-block;padding:4px 10px;border-radius:5px;font-size:11px;color:#64748b;text-decoration:none;font-weight:500;transition:background .15s,color .15s}
 .nav-bar a:hover{background:#1e2a3a;color:#cbd5e1}
 
+/* collapsible cards */
+.card-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;margin-bottom:0;padding-bottom:10px;border-bottom:1px solid #1e2a3a}
+.card-header:hover .collapse-icon{color:#94a3b8}
+.collapse-icon{font-size:10px;color:#334155;transition:transform .2s}
+.collapse-icon.open{transform:rotate(180deg)}
+.card-body{margin-top:14px}
+.card-body.hidden{display:none}
+
 /* usage profile */
 .profile-type{font-size:18px;font-weight:700;color:#f0abfc;margin-bottom:8px}
 .profile-summary{font-size:13px;color:#94a3b8;margin-bottom:14px;line-height:1.7}
@@ -535,7 +543,7 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
       </table>
     </div>
 
-    <div class="card" id="skills">
+    <div class="card grid-full" id="skills">
       <h2>Skills (${snapshot.skills.length}個)</h2>
       <table>
         <tr><th>種別</th><th>コマンド</th><th>説明</th></tr>
@@ -543,17 +551,22 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
       </table>
     </div>
 
-    <div class="card" id="memory">
+    <div class="card grid-full" id="memory">
       <h2>Memory (${snapshot.memory.fileCount}件)</h2>
       ${memorySection}
     </div>
 
     <div class="card grid-full" id="projects">
-      <h2>Projects (${snapshot.projects.length}件) — ★ = 現在のプロジェクト</h2>
-      <table>
-        <tr><th>パス</th><th>memory件数</th><th>memory</th></tr>
-        ${projectRows}
-      </table>
+      <h2 class="card-header" onclick="toggleCard(this)">
+        Projects (${snapshot.projects.length}件) — ★ = 現在のプロジェクト
+        <span class="collapse-icon">▼</span>
+      </h2>
+      <div class="card-body hidden">
+        <table>
+          <tr><th>パス</th><th>memory件数</th><th>memory</th></tr>
+          ${projectRows}
+        </table>
+      </div>
     </div>
 
     <div class="card grid-full" id="diag">
@@ -562,8 +575,13 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
     </div>
 
     <div class="card grid-full" id="folder">
-      <h2>フォルダ構成</h2>
-      ${folderSections || '<p class="empty">取得できませんでした</p>'}
+      <h2 class="card-header" onclick="toggleCard(this)">
+        フォルダ構成
+        <span class="collapse-icon">▼</span>
+      </h2>
+      <div class="card-body hidden">
+        ${folderSections || '<p class="empty">取得できませんでした</p>'}
+      </div>
     </div>
 
   </div>
@@ -571,6 +589,7 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
 </div>
 <script>
 function toggleTree(el){const ul=el.nextElementSibling;if(ul)ul.classList.toggle('collapsed')}
+function toggleCard(h2){const body=h2.nextElementSibling;const icon=h2.querySelector('.collapse-icon');if(body){body.classList.toggle('hidden');icon.classList.toggle('open');}}
 function copyPath(){
   const p='${snapshot.cwd.replace(/'/g, "\\'")}';
   navigator.clipboard.writeText(p).then(()=>{
