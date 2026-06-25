@@ -276,27 +276,38 @@ export function generateHtml(snapshot: ConfigSnapshot): string {
 body{background:#0f1117;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.6}
 .container{max-width:1140px;margin:0 auto;padding:32px 24px}
 
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
-.header-left h1{font-size:22px;font-weight:700;color:#f8fafc}
-.header-left .cwd{color:#64748b;font-size:11px;font-family:monospace;margin-top:4px}
-.score-circle{width:72px;height:72px;border-radius:50%;border:3px solid ${scoreColor};display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
-.score-num{font-size:22px;font-weight:700;color:${scoreColor}}
-.score-label{font-size:9px;color:#64748b}
+header{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:20px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid #1e2a3a}
+.header-left h1{font-size:20px;font-weight:700;color:#f8fafc;letter-spacing:-.01em}
+.header-left .cwd-row{display:flex;align-items:center;gap:6px;margin-top:5px}
+.header-left .cwd{color:#475569;font-size:11px;font-family:monospace}
+.copy-cwd{background:none;border:none;color:#334155;cursor:pointer;padding:2px 4px;border-radius:3px;font-size:11px;transition:color .15s;line-height:1}
+.copy-cwd:hover{color:#94a3b8}
+.score-circle{width:68px;height:68px;border-radius:50%;border:2px solid ${scoreColor};display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 18px ${scoreColor}28}
+.score-num{font-size:21px;font-weight:700;color:${scoreColor}}
+.score-label{font-size:9px;color:#64748b;letter-spacing:.05em}
+.header-actions{display:flex;flex-direction:column;gap:7px;align-items:flex-end}
+.folder-btn{background:#1e2433;border:1px solid #2d3748;color:#94a3b8;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s;white-space:nowrap}
+.folder-btn:hover{background:#2d3748;color:#e2e8f0;border-color:#475569}
+.folder-btn .copied{color:#4ade80}
+.pdf-action{background:#1e2433;border:1px solid #2d3748;color:#64748b;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s}
+.pdf-action:hover{background:#2d3748;color:#94a3b8}
 
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .grid-full{grid-column:1/-1}
 @media(max-width:700px){.grid{grid-template-columns:1fr}}
 
-.card{background:#1e2433;border:1px solid #2d3748;border-radius:12px;padding:20px}
-.card h2{font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.card{background:#161d2b;border:1px solid #1e2a3a;border-radius:10px;padding:20px;transition:border-color .2s}
+.card:hover{border-color:#2d3d55}
+.card h2{font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #1e2a3a}
 
 .kv{display:flex;gap:8px;align-items:baseline;margin-bottom:6px}
 .kv-label{color:#64748b;font-size:12px;min-width:60px}
 .kv-value{color:#e2e8f0;font-weight:500}
 
 table{width:100%;border-collapse:collapse}
-th{text-align:left;color:#64748b;font-size:11px;font-weight:500;padding:6px 8px;border-bottom:1px solid #2d3748}
-td{padding:7px 8px;border-bottom:1px solid #1a2030;font-size:12px;vertical-align:top}
+th{text-align:left;color:#475569;font-size:10px;font-weight:600;padding:6px 8px;border-bottom:1px solid #1e2a3a;letter-spacing:.05em;text-transform:uppercase}
+td{padding:7px 8px;border-bottom:1px solid #111827;font-size:12px;vertical-align:top}
+tr:hover td{background:#1a2535}
 .num{text-align:right;color:#94a3b8}
 .dim{color:#64748b}
 .sections{display:flex;flex-wrap:wrap;gap:4px}
@@ -384,12 +395,11 @@ ul.tree-children{padding-left:18px}
 .diag-detail{color:#94a3b8;font-size:11px;padding-left:22px}
 .diag-suggestion{color:#64748b;font-size:11px;padding-left:22px;margin-top:2px}
 
-footer{margin-top:40px;text-align:center;color:#334155;font-size:11px}
 
 /* nav bar */
-.nav-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;padding:12px 16px;background:#161b27;border:1px solid #2d3748;border-radius:10px}
-.nav-bar a{display:inline-block;padding:3px 10px;border-radius:5px;font-size:11px;color:#94a3b8;text-decoration:none;font-weight:500;background:#1e2433;border:1px solid #2d3748;transition:background .15s,color .15s}
-.nav-bar a:hover{background:#3b82f6;color:#fff;border-color:#3b82f6}
+.nav-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:24px;padding:10px 12px;background:#111827;border:1px solid #1e2a3a;border-radius:8px}
+.nav-bar a{display:inline-block;padding:4px 10px;border-radius:5px;font-size:11px;color:#64748b;text-decoration:none;font-weight:500;transition:background .15s,color .15s}
+.nav-bar a:hover{background:#1e2a3a;color:#cbd5e1}
 
 /* usage profile */
 .profile-type{font-size:18px;font-weight:700;color:#f0abfc;margin-bottom:8px}
@@ -397,13 +407,11 @@ footer{margin-top:40px;text-align:center;color:#334155;font-size:11px}
 .profile-tags{display:flex;flex-wrap:wrap;gap:7px}
 .profile-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;background:#1e2433;border:1px solid #3b3f5c;color:#c4b5fd}
 
-/* pdf button */
-.pdf-btn{position:fixed;top:16px;right:16px;background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;z-index:100;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.pdf-btn:hover{background:#2563eb}
+footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bottom:24px}
 
 @media print{
   body{background:#fff;color:#1a1a1a}
-  .pdf-btn{display:none}
+  .header-actions,.nav-bar,.copy-cwd{display:none}
   .card{background:#f8f9fa;border:1px solid #dee2e6}
   .card h2{color:#495057}
   .mono{color:#495057}
@@ -446,15 +454,23 @@ footer{margin-top:40px;text-align:center;color:#334155;font-size:11px}
 </head>
 <body>
 <div class="container">
-  <button class="pdf-btn" onclick="window.print()">&#128196; PDF として保存</button>
   <header>
     <div class="header-left">
       <h1>Claude Config Inspector</h1>
-      <div class="cwd">${snapshot.cwd}</div>
+      <div class="cwd-row">
+        <span class="cwd">${snapshot.cwd}</span>
+        <button class="copy-cwd" onclick="copyPath()" title="パスをコピー">📋</button>
+      </div>
     </div>
     <div class="score-circle">
       <div class="score-num">${score}</div>
       <div class="score-label">SCORE</div>
+    </div>
+    <div class="header-actions">
+      <button class="folder-btn" onclick="copyPath()" id="folderBtn">
+        <span>📁</span><span id="folderBtnLabel">フォルダパスをコピー</span>
+      </button>
+      <button class="pdf-action" onclick="window.print()">📄 PDF として保存</button>
     </div>
   </header>
 
@@ -555,6 +571,13 @@ footer{margin-top:40px;text-align:center;color:#334155;font-size:11px}
 </div>
 <script>
 function toggleTree(el){const ul=el.nextElementSibling;if(ul)ul.classList.toggle('collapsed')}
+function copyPath(){
+  const p='${snapshot.cwd.replace(/'/g, "\\'")}';
+  navigator.clipboard.writeText(p).then(()=>{
+    const lb=document.getElementById('folderBtnLabel');
+    if(lb){lb.textContent='コピーしました ✓';lb.parentElement.style.color='#4ade80';lb.parentElement.style.borderColor='#166534';setTimeout(()=>{lb.textContent='フォルダパスをコピー';lb.parentElement.style.color='';lb.parentElement.style.borderColor='';},2000);}
+  });
+}
 </script>
 </body>
 </html>`;
