@@ -484,6 +484,7 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
 
   <nav class="nav-bar">
     <a href="#analysis">🧭 使い方分析</a>
+    <a href="#diag">🔍 Diagnostics</a>
     <a href="#settings">⚙️ Settings</a>
     <a href="#mcp">🔌 MCP</a>
     <a href="#hooks">🪝 Hooks</a>
@@ -492,7 +493,6 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
     <a href="#skills">🎯 Skills</a>
     <a href="#memory">🧠 Memory</a>
     <a href="#projects">🗂️ Projects</a>
-    <a href="#diag">🔍 Diagnostics</a>
     <a href="#folder">📁 フォルダ構成</a>
   </nav>
 
@@ -501,6 +501,11 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
     <div class="card grid-full" id="analysis">
       <h2>使い方分析</h2>
       ${usageSection}
+    </div>
+
+    <div class="card grid-full" id="diag">
+      <h2>DIAGNOSTICS (${diagItems.length}件) — Score: <span style="color:${scoreColor}">${score}</span></h2>
+      ${diagSection}
     </div>
 
     <div class="card" id="settings">
@@ -567,11 +572,6 @@ footer{margin-top:32px;text-align:center;color:#1e2a3a;font-size:11px;padding-bo
           ${projectRows}
         </table>
       </div>
-    </div>
-
-    <div class="card grid-full" id="diag">
-      <h2>DIAGNOSTICS (${diagItems.length}件) — Score: <span style="color:${scoreColor}">${score}</span></h2>
-      ${diagSection}
     </div>
 
     <div class="card grid-full" id="folder">
